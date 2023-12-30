@@ -1,5 +1,11 @@
 # Введіть свій ключ антикаптча
+import random
+
 anticaptcha_api_key = '16e948e919f60d19446139a7ac0bf00a'
+
+waiting_time_otp = 15
+timeout = 30
+time_break = random.randint(5, 10)
 
 # Не змінювати
 home_page = 'https://arkana.gg:443'
@@ -10,3 +16,4 @@ url_arkana_about_me = 'https://api-v2.arkana.gg/v2/me'
 url_arkana_daily_claim = 'https://api-v2.arkana.gg/v2/daily-claim'
 data_sitekey = "6LfqK1cjAAAAAJeHWgDadlurPp4_go9e-MrsetlN"
 
+IMAP_HOST: str = 'imap-mail.outlook.com'

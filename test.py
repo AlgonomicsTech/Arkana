@@ -49,4 +49,7 @@ def get_otp_1(email_address, password, imap_server):
     return None
 
 
-print(get_otp_1('jamarzpfred@outlook.com', 'Ii68illei', 'outlook.com'))
+#print(get_otp_1('jamarzpfred@outlook.com', 'Ii68illei', 'outlook.com'))
+
+
+print(send_about_me('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoiZnJlc2hhZHZpc29yMTgyMjI2NzI3NC51LmFya2FuYS5uZWFyIiwiZW1haWwiOiJjdGt5Y2d2ZWF6eHZAcmFtYmxlci5ydSIsImlhdCI6MTcwMzgzMjQ1MiwiZXhwIjoxNzA0NDM3MjUyfQ.QPFGTDi_mrHU-ZzVVtSMpH3yQJEsMU6tdnWZFCaUEZc'))
