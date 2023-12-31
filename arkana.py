@@ -30,10 +30,8 @@ def choose_random_code():
 
 # Вирішуємо каптчу
 def solve_recaptcha(count_try_solve=0):
+    l.info('Captcha found - trying to solve..')
 
-    global ref
-    ref = choose_random_code()
-    l.info('Знайдена каптча - намагаюсь вирішити!')
     solver = recaptchaV3Proxyless()
     solver.set_verbose(1)
     solver.set_key(anticaptcha_api_key)
@@ -46,18 +44,18 @@ def solve_recaptcha(count_try_solve=0):
     g_response = solver.solve_and_return_solution()
     if g_response != 0:
         time.sleep(2)
-        l.success(f"Каптча вирішено успішно!")
+        l.success(f"Captcha solved successfully!")
         print()
         return g_response
     else:
-        l.error(f"Помилка вирішення каптчі: {solver.error_code}!")
-        l.info("Намагаюсь вирішити каптчу повторно")
+        l.error(f"Captcha resolution error | {solver.error_code}!")
+        l.info("I am trying to solve the captcha again")
         count_try_solve += 1
         if count_try_solve < 5:
             # Повертайте результат рекурсивного виклику
             return solve_recaptcha(count_try_solve)
         else:
-            l.error("Всі спроби вирішення капчі завершились помилкою")
+            l.error("All attempts to solve the captcha ended in error")
             return None
 
 
@@ -81,12 +79,12 @@ def send_email(email_address, random_useragent):
 
         try:
             r = session.post(url_arkana_signin, json=payload, headers=headers)
-            l.info(f'Надсилаю лист для верифікації на {email_address}')
+            l.info(f'{email_address} | send email for verification')
             return r.status_code
         except Exception as e:
-            l.error(f'Помилка при надсиланні листа: {str(e)}')
+            l.error(f'{email_address} | error when sending email | {str(e)}')
     else:
-        l.error("Помилка вирішення каптчі. Не відправлено емейл.")
+        l.error("captcha resolution error | not send email")
 
 
 # Отримуємо ОТП з вказаної адреси
@@ -103,7 +101,7 @@ def get_otp(email_address, password, imap_server):
             messages = messages[0].split()
 
             if not messages:
-                l.error(f"{email_address} | лист з OTP не знайдено")
+                l.error(f"{email_address} | email with OTP code not found")
                 time.sleep(waiting_time_otp)  # Затримка перед наступною спробою
                 continue
 
@@ -121,14 +119,14 @@ def get_otp(email_address, password, imap_server):
                         l.info(f"{email_address} | {verification_code}")
                         return verification_code
                     else:
-                        l.error('OTP код не знайдено')
+                        l.error('OTP code not found')
                         time.sleep(time_break)
 
         # Якщо OTP код так і не знайдено
-        raise ValueError("OTP код не знайдено після 15 спроб")
+        raise ValueError("email with  OTP code not found after 10 attempts")
 
     except Exception as err:
-        l.error(f"Помилка отримання ОТП з {email_address}: {err}")
+        l.error(f"{email_address} | error get OPT | {err}")
     finally:
         mail.logout()
 
@@ -164,16 +162,17 @@ def input_otp(otp, random_useragent):
 
     # Making the POST request
     response = session.post(url_arkana_verify, json=data, headers=headers)
-    print(response.json())
+
+    #print(response.json())
     # Checking the response
     if response.status_code == 200:
         response_data = response.json()
-        l.info("Вводимо код авторизації")
+        l.info("input OTP code")
         auth_token = response_data['message']['token']
         acount_id = response_data['message']['account_id']
         return auth_token, acount_id
     else:
-        l.error(f"Помилка при вводі ОТП: {response.status_code}")
+        l.error(f"Error when entering OTP | {response.status_code}")
         return False
 
 
@@ -186,7 +185,7 @@ def save_data(mail, account_id, count_points=0):
 
     with open(file_path, 'a') as file:
         file.write(data_line)
-    l.info(f"Дані {file_path} успішно збережені")
+    l.info(f"{email} | data save in {file_path}")
 
 
 
@@ -209,7 +208,7 @@ def check_time_elapsed(email_address):
                 last_time = datetime.strptime(last_time_str, "%d-%m-%Y %H:%M:%S")
                 current_time = datetime.now()
                 if current_time - last_time >= timedelta(days=1):
-                    l.info("З минулого клейму пройшло більше 24 годин")
+                    l.info("check for 24 hours | True")
                     return True
                 else:
                     remaining_time = timedelta(days=1) - (current_time - last_time)
@@ -287,14 +286,14 @@ def total_daily_claim(email_address, password, imap, random_useragent=random_use
         auth_token, account_id = input_otp(otp, random_useragent)
         if auth_token is not None:
             daily_claim(random_useragent)
-            l.success(f"Щоденні поінти {email_address} отримано успішно!")
+            l.success(f"{email_address} | daily points received successfully")
 
             if update_points_and_timestamp(email_address):
-                l.info(f"Дані {email_address} оновлено")
+                l.info(f"{email_address} | data update")
             else:
-                l.error(f"Email {email_address} не знайдено у файлі.")
+                l.error(f"{email_address} | not found")
         else:
-            l.error("Щось пішло не так, переходимо на наступної адреси")
+            l.error("unknown error | go to the next email")
     else:
-        l.info("Переходимо на наступної адреси")
+        l.info("go to the next email")
 

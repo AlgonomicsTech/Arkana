@@ -19,12 +19,15 @@ def main_register_with_selenium(email_address, apps_password, imap):
 
         # Генерація випадкового User-Agent
         random_user_agent = ua.random
+        random_size = random.choice(window_sizes)
+
 
         # Налаштування опцій WebDriver
         options = Options()
         options.add_argument(f'user-agent={random_user_agent}')
         options.headless = True  # Запуск браузера у фоновому режимі
         driver = webdriver.Chrome(options=options)
+        driver.set_window_size(*random_size)
         try:
             # Відкриття сайту
             driver.get(url_arkana + choose_random_code())
@@ -48,7 +51,7 @@ def main_register_with_selenium(email_address, apps_password, imap):
             otp = get_otp(email_address, apps_password, imap)
             otp_input.send_keys(otp)
             l.info(f'{email_address} | input OTP')
-            time.sleep(time_break)
+            time.sleep(time_break*2)
 
             WebDriverWait(driver, timeout*2).until(EC.element_to_be_clickable(
                 (By.XPATH, '//*[@id="__next"]/div[2]/div/div/form/button'))).click()
