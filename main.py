@@ -32,16 +32,16 @@ def main():
     else:
         ref_code_list = []
 
-    log.success(f'Успішно завантажені {len(accounts_list)} аккаунти для реєстрації | {len(ref_code_list)} реферальні коди')
+    log.success(f'Downloaded successfully {len(accounts_list)} accounts for registration | {len(ref_code_list)} referral codes')
     log.success(
-        f'Успішно завантажені {len(successfully_accounts_list)} успішно зареєстровані аккаунти | {len(proxies_list)} проксі')
+        f'Downloaded successfully {len(successfully_accounts_list)} successfully registered accounts | {len(proxies_list)} proxy')
     time.sleep(2)
 
 
     software_method = int(input('\n1. Реєстрація аккаунтів\n'
                                 '2. Фармінг щоденних поінтів\n'
                                 '3. Поревірити кількість валідних email\n'
-                                '4. Порахувати загальну кількість поінтів з БД\n'
+                                '4. Порахувати загальну кількість поінтів\n'
                                 'Зроби свій вибір:\n'))
     print()
 
@@ -70,7 +70,7 @@ def main():
             print()
 
     elif software_method == 3:
-        log.info("Починаю рахувати..")
+        log.info("I start counting..")
         check_pass_success = 0
         total_count_email = len(accounts_list)
 
@@ -80,19 +80,22 @@ def main():
             if check_email(email_adress, apps_password):
                 check_pass_success += 1
 
-        log.success(f'Кількість аккаунтів яка пройшла перевірку | {check_pass_success}/{total_count_email}')
+        log.success(f'The number of accounts that passed the check | {check_pass_success}/{total_count_email}')
         print()
 
     elif software_method == 4:
-        for account in accounts_list:
-            log.error("Ще не інтегровано")
+
+        ref_points = len(successfully_accounts_list) * 1000
+        total_points = [int(account_successfully.split(';')[2]) for account_successfully in successfully_accounts_list]
+
+        log.success(f"Approximate number of points already received | {ref_points + sum(total_points)}")
 
     else:
-        log.error("Невідомий метод, оберіть 1, 2, 3 або 4!")
+        log.error("Unknown method, choose 1, 2, 3 or 4!")
 
     time.sleep(time_break)
     print()
-    log.success('Роботу успішно завершено')
+    log.success('Work completed successfully')
 
     time.sleep(time_break)
     log.debug('Press Enter to exit...')

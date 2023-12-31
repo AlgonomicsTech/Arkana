@@ -72,7 +72,6 @@ def main_register_with_selenium(email_address, apps_password, imap):
 
             save_data(email_address, account_id, 1000)
 
-            l.info(f"{email_address} | get refcode ")
             WebDriverWait(driver, 10).until(
                 EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/div/div[2]/div/div[3]/div[1]/div[2]/div[2]/div/button'))).click()
 

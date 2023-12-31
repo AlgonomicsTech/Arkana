@@ -177,15 +177,15 @@ def input_otp(otp, random_useragent):
 
 
 # Зберігаємо дані
-def save_data(mail, account_id, count_points=0):
+def save_data(email_address, account_id, count_points=0):
 
     file_path = 'successfully_registered.txt'
     current_time = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-    data_line = f"{mail};{account_id};{count_points};{current_time}\n"
+    data_line = f"{email_address};{account_id};{count_points};{current_time}\n"
 
     with open(file_path, 'a') as file:
         file.write(data_line)
-    l.info(f"{email} | data save in {file_path}")
+    l.info(f"{email_address} | data save in {file_path}")
 
 
 
