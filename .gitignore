@@ -1,2 +1,5 @@
 venv/
 .gitignore
+email_data.txt
+proxy.txt
+successfully_registered.txt

@@ -1,4 +1,4 @@
-#  Acgonomics - Farmer Arkana
+#  Algonomics - Farmer Arkana
 
 
 ## 🔗 Links
@@ -53,7 +53,7 @@ pip install -r requirements.txt
 
 
 ## ENGLISH VERSION:
-# Acgonomics - Farmer Arkana
+# Algonomics - Farmer Arkana
 
 
 ## 🔗 Links

@@ -1,7 +1,7 @@
 # Введіть свій ключ антикаптча
 import random
 
-anticaptcha_api_key = '16e948e919f60d19446139a7ac0bf00a'
+anticaptcha_api_key = ''
 
 waiting_time_otp = 15
 timeout = 30
