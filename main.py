@@ -1,10 +1,12 @@
 import time
+from logo import print_ALGONOMICS
 from os.path import exists
 from better_proxy import Proxy
 from arkana import *
 from loguru import logger as log
-from register_with_selenium import main_register_with_selenium
+from auto_reg_with_selenium import auto_reg
 from imap_valid_checker import check_email
+
 
 log.add("logger.log", format="{time:YYYY-MM-DD | HH:mm:ss.SSS} | {level} \t| {function}:{line} - {message}")
 
@@ -32,17 +34,22 @@ def main():
     else:
         ref_code_list = []
 
+    print()
+    print_ALGONOMICS("ALGONOMICS")
+    time.sleep(2)
+    print()
+
     log.success(f'Downloaded successfully {len(accounts_list)} accounts for registration | {len(ref_code_list)} referral codes')
     log.success(
         f'Downloaded successfully {len(successfully_accounts_list)} successfully registered accounts | {len(proxies_list)} proxy')
+    log.info('💰 DONATION EVM ADDRESS: 0x4A080654795e526801954493BD0D712609d0ccEF')
     time.sleep(2)
 
-
-    software_method = int(input('\n1. Реєстрація аккаунтів\n'
-                                '2. Фармінг щоденних поінтів\n'
-                                '3. Поревірити кількість валідних email\n'
-                                '4. Порахувати загальну кількість поінтів\n'
-                                'Зроби свій вибір:\n'))
+    software_method = int(input('\n1. Account registration\n'
+                                '2. Farming daily points\n'
+                                '3. Check the number of valid emails\n'
+                                '4. Calculate the total number of points\n'
+                                'Make your choice:\n'))
     print()
 
     if software_method == 1:
@@ -50,7 +57,7 @@ def main():
             email_address, apps_password, imap = account.split(';')
             if is_account_registered(email_address):
                 try:
-                    main_register_with_selenium(email_address, apps_password, imap)
+                    auto_reg(email_address, apps_password, imap)
                     time.sleep(waiting_time_otp*3)
                     print()
                 except:
@@ -59,7 +66,7 @@ def main():
             else:
                 l.info(f"{email_address} | already regitered")
                 l.info("go to the next email")
-                time.sleep(1)
+                time.sleep(2)
                 print()
                 continue
     elif software_method == 2:

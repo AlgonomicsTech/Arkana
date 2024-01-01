@@ -1,155 +1,107 @@
-#  StarLabs - Twitter 
+#  Acgonomics - Farmer Arkana
 
-
-![Logo](https://i.postimg.cc/kGNfcw5f/twitter.jpg)
-
-## [SEE ENGLISH VERSION BELOW ](https://github.com/0xStarLabs/StarLabs-Twitter#english-version)👇
 
 ## 🔗 Links
-[![Telegram channel](https://img.shields.io/endpoint?url=https://runkit.io/damiankrawczyk/telegram-badge/branches/master?url=https://t.me/StarLabsTech)](https://t.me/StarLabsTech)
-[![Telegram chat](https://img.shields.io/endpoint?url=https://runkit.io/damiankrawczyk/telegram-badge/branches/master?url=https://t.me/StarLabsChat)](https://t.me/StarLabsChat)
 
-🔔 CHANNEL: https://t.me/StarLabsTech
+🔔 CHANNEL: https://t.me/AlgonomicsTech
 
-💬 CHAT: https://t.me/StarLabsChat
+💬 CHAT: https://t.me/+7zMjbT6mRBZlMGEy
 
-💰 DONATION EVM ADDRESS: 0x620ea8b01607efdf3c74994391f86523acf6f9e1
+💰 DONATION EVM ADDRESS: 0x4A080654795e526801954493BD0D712609d0ccEF
 
 
 
 ## 🤖 | Функционал:
 
-🟢 Подписка
+🟢 Регистрация аккаунтов
 
-🟢 Лайк
+🟢 Дейли клейм поинтов
 
-🟢 Ретвит
+🟢 Проверка IMAP на валидность
 
-🟢 Получение json куки и auth token через логин и пароль
+🟢 Подсчет всех поинтов фермы
 
-🟢 Разморозка временно заблокированных аккаунтов
 
-🟢 Твиты (с картинкой, с цитатой другого твита)
-
-🟢 Комментарии (с картинкой и без)
-
-🟢 Смена любых данных аккаунта: имя, пароль и тд
-
-🟢 Отправка личных сообщений
-
-🟢 Проверка входящих сообщений каждого аккаунта
-
-🟢 Проверка аккаунта на валидность
 
 
 ## 🚀 Installation
 ```
-
-git clone https://github.com/0xStarLabs/StarLabs-Twitter.git
-
-cd StarLabs-Twitter
-
 pip install -r requirements.txt
 
-# Перед началом работы настройте необходимые модули в файлах config.ini и /data
+# Перед началом работы редактируйте данные в файлах config.py и email_data.txt, proxy.txt - по желанию, рекомендую соотношение 1/5, или меньше.
 
-python main.py
 ```
 
 ## ⚙️ Config
 
-| Name | Description |
-| --- | --- |
-| max_tasks_retries | Максимальное количество попыток при выполнении задания |
-| pause_between_tasks | Пауза между каждым действием |
-| 1stcaptcha_api_key | Ключ от https://1stcaptcha.com/ |
-| auto_unfreeze | Автоматическая разблокировка аккаунтов |
+| Name | Description                                                                             |
+| --- |-----------------------------------------------------------------------------------------|
+| email_data.txt | EmailAddress;IMAPpassword(может отличаться от пароля аккаунта);IMAP(например gmail.com) |
+| anticaptcha_api_key | введите Ключ API от http://getcaptchasolution.com/xlzduudert                            |
 
 
-## 🗂️ Data
 
-Данные в папке data:
 
-| Name | Description |
-| --- | --- |
-| accounts.txt | Содержит аккаунты твиттер |
-| comments.txt | Содержит текст на функций комментариев |
-| failed_accounts.txt | Содержит аккаунты которые не смогли выполнить задачу |
-| locked_accounts.txt | Содержит аккаунты которые временно заблокированные |
-| tweets.txt | Содержит текст для функции твитов |
-| proxies.txt | Содержит прокси в формате user:pass@ip:port |
 
 ## Дисклеймер
-Автоматизация учетных записей пользователей Twitter, также известных как самостоятельные боты, является нарушением Условий обслуживания и правил сообщества Twitter и приведет к закрытию вашей учетной записи (аккаунтов). Рекомендуется осмотрительность. Я не буду нести ответственность за ваши действия. Прочтите об Условиях обслуживания Twitter и Правилах сообщества.
+Автоматизация учетных записей пользователей, также известных как самостоятельные боты, является нарушением Условий обслуживания и правил сообщества  и приведет к закрытию вашей учетной записи (аккаунтов). Рекомендуется осмотрительность. Я не буду нести ответственность за ваши действия. Прочтите об Условиях обслуживания и Правилах сообщества.
 
-Это программное обеспечение было написано как доказательство концепции того, что учетные записи Twitter могут быть автоматизированы и могут выполнять действия, выходящие за рамки обычных пользователей Twitter, чтобы Twitter мог вносить изменения. Авторы  освобождаются от любой ответственности, которую может повлечь за собой ваше использование.
+Это программное обеспечение было написано как доказательство концепции того, что учетные записи могут быть автоматизированы и могут выполнять действия, выходящие за рамки обычных пользователей. Авторы  освобождаются от любой ответственности, которую может повлечь за собой ваше использование.
+
+
+
+
 
 ## ENGLISH VERSION:
+# Acgonomics - Farmer Arkana
 
-## 🤖 | Features :
 
-🟢 Subscribe
+## 🔗 Links
 
-🟢 Like
+🔔 CHANNEL: https://t.me/AlgonomicsTech
 
-🟢 Retweet
+💬 CHAT: https://t.me/+7zMjbT6mRBZlMGEy
 
-🟢 Receive json cookie and auth token via login and password
+💰 DONATION EVM ADDRESS: 0x4A080654795e526801954493BD0D712609d0ccEF
 
-🟢 Unfreezing temporarily blocked accounts
 
-🟢 Tweets (with picture, with quote of another tweet)
 
-🟢 Comments (with and without picture)
+## 🤖 | Functional:
 
-🟢 Change any account details: name, password, etc.
+🟢 Account registration
 
-🟢 Send private messages
+🟢 Daily stamp points
 
-🟢 Check incoming messages of each account
+🟢 Checking IMAP for validity
 
-🟢 Checking account validity
+🟢 Counting all farm points
+
+
+
 
 ## 🚀 Installation
 ```
-git clone https://github.com/0xStarLabs/StarLabs-Twitter.git
-
-cd StarLabs-Twitter
-
 pip install -r requirements.txt
 
-# Before you start, configure the required modules in config.ini and /data files
+# Before starting work, the necessary data is in the files config.py and email_data.txt, proxy.txt - optional, I recommend a ratio of 1/5
 
-python main.py
 ```
 
 ## ⚙️ Config
 
 | Name | Description |
-| --- | --- |
-| max_tasks_retries | Maximum number of attempts to complete a task |
-| pause_between_tasks | pause between each action |
-| 1stcaptcha_api_key | 1stcaptcha_api_key | Key to https://1stcaptcha.com/ |
-| auto_unfreeze | Automatically unlock accounts |
+| --- |---------------------------------------------- -------------------------------------------|
+| email_data.txt | EmailAddress;IMAPpassword(may differ from the account password);IMAP(for example gmail.com) |
+| anticaptcha_api_key | enter API Key from http://getcaptchasolution.com/xlzduudert |
 
 
 
-## 🗂️ Data
 
-The data is in the data folder:
-
-| Name | Description |
-| --- | --- |
-| accounts.txt | Contains Twitter accounts |
-| comments.txt | Contains text on comment functions |
-| failed_accounts.txt | Contains accounts that failed to complete the task |
-| locked_accounts.txt | Contains accounts that are temporarily locked |
-| tweets.txt | Contains the text for the tweets function |
-| proxies.txt | Contains proxies in the format user:pass@ip:port |
 
 ## Disclaimer
+Automation of user accounts, also known as self-bots, is a violation of the Terms of Service and Community Guidelines and will result in termination of your account(s). Caution is advised. I will not be held responsible for your actions. Read our Terms of Service and Community Guidelines.
 
-The automation of User Twitter accounts also known as self-bots is a violation of Twitter Terms of Service & Community guidelines and will result in your account(s) being terminated. Discretion is adviced. I will not be responsible for your actions. Read about Twitter Terms Of service and Community Guidelines
+This software was written as a proof of concept that accounts could be automated and could perform actions beyond the scope of regular users. The authors disclaim any liability that may arise from your use.
 
-Twitter StarLabs was written as a proof of concept that Twitter accounts can be automated and can perform actions beyond the scope of regular Twitter Users so that Twitter can make changes. The Twitter StarLabs authors are released of any liabilities which your usage may entail.
+
 

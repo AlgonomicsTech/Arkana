@@ -11,22 +11,27 @@ from loguru import logger as l
 from curl_cffi import requests
 
 
-session = requests.Session(impersonate="chrome110", timeout=60)
+session = requests.Session(impersonate="chrome110", timeout=timeout*2)
 l.add("logger.log", format="{time:YYYY-MM-DD | HH:mm:ss.SSS} | {level} \t| {function}:{line} - {message}")
-ref = None
+
 
 
 # Обираємо випадковий реф код
-def choose_random_code():
-    with open('ref.txt', 'r') as file:
-        codes = file.readlines()
+def choose_random(file_name):
+    try:
+        with open(file_name, 'r') as file:
+            codes = file.readlines()
 
-    # Видалення символів нового рядка
-    codes = [code.strip() for code in codes]
+        codes = [code.strip() for code in codes]
+        return random.choice(codes)
+    except:
+        return ''
 
-    # Повернення випадкового коду
-    return random.choice(codes)
-
+PROXY = choose_random('proxy.txt')
+session.proxies = {
+    'http': PROXY,
+    'https': PROXY,
+}
 
 # Вирішуємо каптчу
 def solve_recaptcha(count_try_solve=0):
@@ -35,7 +40,7 @@ def solve_recaptcha(count_try_solve=0):
     solver = recaptchaV3Proxyless()
     solver.set_verbose(1)
     solver.set_key(anticaptcha_api_key)
-    solver.set_website_url(url_arkana+ref)
+    solver.set_website_url(url_arkana)
     solver.set_website_key(data_sitekey)
     solver.set_page_action(home_page)
     solver.set_min_score(0.9)
@@ -44,8 +49,7 @@ def solve_recaptcha(count_try_solve=0):
     g_response = solver.solve_and_return_solution()
     if g_response != 0:
         time.sleep(2)
-        l.success(f"Captcha solved successfully!")
-        print()
+        l.info(f"Captcha solved successfully!")
         return g_response
     else:
         l.error(f"Captcha resolution error | {solver.error_code}!")
@@ -135,11 +139,9 @@ def get_otp(email_address, password, imap_server):
 
 # Вводимо ОТП
 def input_otp(otp, random_useragent):
-    l.success(f'get OTP code | {otp}')
 
-    if ref == False:
-        data = {
-            "code": otp,
+    data = {
+        "code": otp,
         }
 
     # Headers
@@ -286,12 +288,18 @@ def total_daily_claim(email_address, password, imap, random_useragent=random_use
         auth_token, account_id = input_otp(otp, random_useragent)
         if auth_token is not None:
             daily_claim(random_useragent)
-            l.success(f"{email_address} | daily points received successfully")
+
 
             if update_points_and_timestamp(email_address):
                 l.info(f"{email_address} | data update")
+
             else:
                 l.error(f"{email_address} | not found")
+
+            l.success(f"{email_address} | daily points received successfully")
+            time.sleep(time_break)
+            print()
+
         else:
             l.error("unknown error | go to the next email")
     else:

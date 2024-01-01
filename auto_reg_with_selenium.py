@@ -11,26 +11,30 @@ from arkana import *
 from imap_valid_checker import check_email
 from fake_useragent import UserAgent
 
-def main_register_with_selenium(email_address, apps_password, imap):
+def auto_reg(email_address, apps_password, imap):
     if check_email(email_address, apps_password):
 
         # Створення об'єкта UserAgent
         ua = UserAgent()
 
-        # Генерація випадкового User-Agent
+        # Вибір випадкових позицій
         random_user_agent = ua.random
         random_size = random.choice(window_sizes)
+        PROXY = choose_random('proxy.txt')
 
 
         # Налаштування опцій WebDriver
         options = Options()
         options.add_argument(f'user-agent={random_user_agent}')
+        options.add_argument(f'--proxy-server={PROXY}')
+
         options.headless = True  # Запуск браузера у фоновому режимі
         driver = webdriver.Chrome(options=options)
         driver.set_window_size(*random_size)
+
         try:
             # Відкриття сайту
-            driver.get(url_arkana + choose_random_code())
+            driver.get(url_arkana + choose_random('ref.txt'))
             WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="__next"]/div/div[2]/div/div[1]/div[1]/div[2]/button'))).click()
             time.sleep(time_break)
 
